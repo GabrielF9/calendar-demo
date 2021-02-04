@@ -7,10 +7,34 @@ export const Container = styled.div`
   width: 40%;
   height: 100%;
   border-left: 2px solid #E5E5E5;
+  overflow: hidden;
 
   @media (max-width: 1024px) {
     width: 100%;
     border: none;
+  }
+`;
+
+export const ScheduleOverflow = styled.div`
+  padding-left: 2rem;
+  padding-top: 2rem;
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #888888;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #555555;
   }
 `;
 

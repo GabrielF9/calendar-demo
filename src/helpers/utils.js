@@ -1,16 +1,18 @@
+import dayjs from "dayjs";
+
 export const resumeMonths = [
-  'Jan',
-  'Feb',
-  'Mar',
-  'Apr',
-  'May',
-  'Jun',
-  'Jul',
-  'Aug',
-  'Sep',
-  'Oct',
-  'Nov',
-  'Dec'
+  { "month": 'Jan', "is31": true },
+  { "month": 'Feb', "is31": false },
+  { "month": 'Mar', "is31": true },
+  { "month": 'Apr', "is31": false },
+  { "month": 'May', "is31": true },
+  { "month": 'Jun', "is31": false },
+  { "month": 'Jul', "is31": true },
+  { "month": 'Aug', "is31": true },
+  { "month": 'Sep', "is31": false },
+  { "month": 'Oct', "is31": true },
+  { "month": 'Nov', "is31": false },
+  { "month": 'Dec', "is31": true }
 ];
 
 export const resumeWeekDays = [
@@ -48,17 +50,62 @@ export function getSaudation() {
   }
 }
 
-export function getCurrentDay() {
-  const date = new Date();
-
+export function getCurrentDay(actualDate) {
   return {
-    currentDay: `${resumeMonths[date.getMonth()]} ${date.getDate().toString().padStart(2, '0')}`,
-    currentDayName: weekDays[date.getDay()]
+    currentDay: `${resumeMonths[actualDate.getMonth()].month} ${actualDate.getDate().toString().padStart(2, '0')}`,
+    currentDayName: weekDays[actualDate.getDay()]
   };
 }
 
 export function getCurrentMonth() {
   const date = new Date();
 
-  return `${resumeMonths[date.getDay()]} ${date.getFullYear()}`;
+  return `${resumeMonths[date.getMonth()].month.toUpperCase()} ${date.getFullYear()}`;
+}
+
+export function getMonthDaysPerWeek() {
+  const date = new Date();
+  const month = date.getMonth();
+  const year = date.getFullYear();
+
+  const startOfMonth = dayjs().startOf('month').day();
+
+  let days = 30;
+
+  if (month === 1 && !isLeap(year)) {
+    days = 28;
+  } else if (month === 1 && isLeap(year)) {
+    days = 29;
+  } else if (resumeMonths[month].is31) {
+    days = 31;
+  }
+
+  const monthDays = [];
+
+  for (let i = 0; i < startOfMonth; i++) {
+    monthDays.push('');
+  }
+  for (let i = 1; i <= days; i++) {
+    monthDays.push(i.toString().padStart(2, '0'));
+  }
+
+  if (monthDays.length < 35) {
+    for (let i = monthDays.length; i < 35; i++) {
+      monthDays.push('');
+    }
+  }
+
+  const result = [
+    monthDays.slice(0, 7),
+    monthDays.slice(7, 14),
+    monthDays.slice(14, 21),
+    monthDays.slice(21, 28),
+    monthDays.slice(28, 35),
+  ];
+
+  return result;
+}
+
+export function isLeap(year) {
+  return ((year % 4 === 0) && ((year % 100 !== 0) || (year % 400 === 0)));
 }

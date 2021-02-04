@@ -19,18 +19,27 @@ export const Global = createGlobalStyle`
 
 export const ThinText = styled.p`
   font-weight: 100;
-  align-self: center;
+  font-size: ${props => props.fontSize || 'auto'}
 `;
 
 export const MediumText = styled.p`
   font-weight: 500;
+  font-size: ${props => props.fontSize || 'auto'}
 `;
 
-export const RowCenteredStart = styled.p`
+export const RowCenteredStart = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+`;
+
+export const ColumnCenteredStart = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: ${props => props.padding || 0};
 `;
 
 export default Global;
