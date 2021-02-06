@@ -45,9 +45,9 @@ export const Divider = styled.div`
 
 export const Reminder = styled.div`
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
   padding-left: 1rem;
   width: 75%;
   height: 100px;
@@ -56,8 +56,4 @@ export const Reminder = styled.div`
   background-color: ${props => convertHexToRgba(props.color || '#ef476f', 0.25)};
   color: ${props => props.color || '#ef476f'};
   cursor: pointer;
-`;
-
-export const WeatherImage = styled.img`
-  margin-left: 1rem;
 `;

@@ -36,7 +36,7 @@ function Home() {
         access_key: process.env.REACT_APP_WEATHER_API_KEY
       }
     }).then(res => {
-      data.weather = res.data.current.weather_icons[0];
+      data.weather = res.data.current.weather_descriptions[0];
 
       let reminders = localStorage.getItem('reminders') ? JSON.parse(localStorage.getItem('reminders')) : [];
       console.log(reminders);
@@ -67,7 +67,7 @@ function Home() {
         access_key: process.env.REACT_APP_WEATHER_API_KEY
       }
     }).then(res => {
-      data.weather = res.data.current.weather_icons[0];
+      data.weather = res.data.current.weather_descriptions[0];
 
       let _reminders = localStorage.getItem('reminders') ? JSON.parse(localStorage.getItem('reminders')) : [];
       const _id = _reminders.findIndex(reminder => reminder.id === data.id);

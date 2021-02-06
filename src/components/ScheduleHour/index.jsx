@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { convert12hTo24h } from '../../helpers/utils';
 import { RegularText } from '../Global';
-import { Container, Hour, Divider, ScheduleHeader, Reminder, WeatherImage } from "./styles";
+import { Container, Hour, Divider, ScheduleHeader, Reminder } from "./styles";
 
 function ScheduleHour(props) {
   const { schedule, reminders, editReminder } = props;
@@ -35,7 +35,7 @@ function ScheduleHour(props) {
         hourReminders.map((hourReminder) => (
           <Reminder key={hourReminder.id} color={hourReminder.color} onClick={(e) => { e.stopPropagation(); onEdit(hourReminder.id); }}>
             <RegularText fontSize="26px">{hourReminder.name}</RegularText>
-            <WeatherImage src={hourReminder.weather} />
+            <RegularText fontSize="18px">Forecast: {hourReminder.weather}</RegularText>
           </Reminder>
         ))
       }
