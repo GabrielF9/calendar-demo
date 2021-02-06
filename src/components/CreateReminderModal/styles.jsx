@@ -13,13 +13,16 @@ const useStyles = makeStyles(theme => ({
   },
   dialogTitle: {
     padding: 0,
+    width: '100%',
     height: '100%',
     marginBottom: "8px",
+    display: 'row',
     justifyContent: "space-between",
     "& > h2": {
       display: "flex",
-      flexFlow: "column",
+      flexFlow: "row",
       alignItems: "center",
+      justifyContent: "space-between",
       "& > svg": {
         marginBottom: "8px"
       },
@@ -67,6 +70,9 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     marginBottom: '8px',
     borderRadius: '3px'
+  },
+  deleteIcon: {
+    cursor: 'pointer'
   }
 }));
 

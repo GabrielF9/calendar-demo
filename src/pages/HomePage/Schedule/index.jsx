@@ -5,7 +5,7 @@ import { getCurrentDay } from "../../../helpers/utils";
 import { Container, CreateReminderButton, ScheduleOverflow, CurrentDay } from "./styles";
 
 function Schedule(props) {
-  const { actualDate, createNewReminder, update, setUpdate } = props;
+  const { actualDate, createNewReminder, update, setUpdate, editReminder } = props;
 
   const [currentDay, setCurrentDay] = useState('');
   const [currentDayName, setCurrentDayName] = useState('');
@@ -50,7 +50,7 @@ function Schedule(props) {
         </CreateReminderButton>
       </RowCenteredStart>
       <ScheduleOverflow>
-        {schedules.map((schedule) => <ScheduleHour key={schedule} schedule={schedule} reminders={reminders} />)}
+        {schedules.map((schedule) => <ScheduleHour key={schedule} schedule={schedule} reminders={reminders} editReminder={editReminder} />)}
       </ScheduleOverflow>
     </Container>
   );

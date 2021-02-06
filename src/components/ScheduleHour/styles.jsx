@@ -1,10 +1,11 @@
 import styled from "styled-components";
+import { convertHexToRgba } from "../../helpers/utils";
 
 export const Container = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
   width: 100%;
   min-height: 100px;
 `;
@@ -42,5 +43,21 @@ export const Divider = styled.div`
   }
 `;
 
+export const Reminder = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 1rem;
+  width: 75%;
+  height: 100px;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  background-color: ${props => convertHexToRgba(props.color || '#ef476f', 0.25)};
+  color: ${props => props.color || '#ef476f'};
+  cursor: pointer;
+`;
 
-
+export const WeatherImage = styled.img`
+  margin-left: 1rem;
+`;

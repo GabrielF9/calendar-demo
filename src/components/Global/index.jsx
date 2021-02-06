@@ -27,6 +27,10 @@ export const MediumText = styled.p`
   font-size: ${props => props.fontSize || 'auto'}
 `;
 
+export const RegularText = styled.p`
+  font-size: ${props => props.fontSize || 'auto'}
+`;
+
 export const RowCenteredStart = styled.div`
   display: flex;
   flex-direction: row;

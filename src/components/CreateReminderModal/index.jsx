@@ -3,16 +3,17 @@ import { Box, Button, Container, Dialog, DialogActions, DialogContent, DialogTit
 import ColorSelector from '../ColorSelector';
 import dayjs from 'dayjs';
 import useStyles from './styles';
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 
 function CreateReminderModal(props) {
-  const { open, handleClose, onCreate } = props;
+  const { open, handleClose, onCreate, onEdit, reminderEdit, onDelete } = props;
   const classes = useStyles();
 
-  const [name, setName] = useState("");
-  const [color, setColor] = useState('#ef476f');
-  const [date, setDate] = useState(dayjs().format('YYYY-MM-DD'));
-  const [time, setTime] = useState(dayjs().format('HH:mm'));
-  const [city, setCity] = useState("");
+  const [name, setName] = useState(reminderEdit ? reminderEdit.name : "");
+  const [color, setColor] = useState(reminderEdit ? reminderEdit.color : '#ef476f');
+  const [date, setDate] = useState(reminderEdit ? reminderEdit.date : dayjs().format('YYYY-MM-DD'));
+  const [time, setTime] = useState(reminderEdit ? reminderEdit.time : dayjs().format('HH:mm'));
+  const [city, setCity] = useState(reminderEdit ? reminderEdit.city : "");
 
   const createReminder = () => {
     let data = {
@@ -20,10 +21,28 @@ function CreateReminderModal(props) {
       color,
       date,
       time,
-      city
+      city,
+      id: Date.now()
     };
 
     onCreate(data);
+  }
+
+  const editReminder = () => {
+    let data = {
+      name,
+      color,
+      date,
+      time,
+      city,
+      id: reminderEdit.id,
+    };
+
+    onEdit(data);
+  }
+
+  const deleteReminder = () => {
+    onDelete(reminderEdit.id);
   }
 
   return (
@@ -38,7 +57,8 @@ function CreateReminderModal(props) {
       disableEscapeKeyDown={true}
     >
       <DialogTitle id="alert-dialog-title" className={classes.dialogTitle}>
-        <span>Create a Reminder</span>
+        <span>{reminderEdit ? 'Edit' : 'Create'} a Reminder</span>
+        {reminderEdit && <DeleteOutlineIcon className={classes.deleteIcon} onClick={deleteReminder} />}
       </DialogTitle>
       <DialogContent className={classes.dialogContent}>
         <TextField
@@ -123,8 +143,8 @@ function CreateReminderModal(props) {
         <Button onClick={handleClose} color="inherit">
           Cancel
         </Button>
-        <Button variant="outlined" disabled={!(name && color && date && time && city)} onClick={createReminder}>
-          Create
+        <Button variant="outlined" disabled={!(name && color && date && time && city)} onClick={reminderEdit ? editReminder : createReminder}>
+          {reminderEdit ? 'Edit' : 'Create'}
         </Button>
       </DialogActions>
     </Dialog >

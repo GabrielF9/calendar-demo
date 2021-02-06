@@ -109,3 +109,21 @@ export function getMonthDaysPerWeek() {
 export function isLeap(year) {
   return ((year % 4 === 0) && ((year % 100 !== 0) || (year % 400 === 0)));
 }
+
+export function convertHexToRgba(hex, opacity = 1) {
+  let hexR = parseInt(hex.substr(1, 2), 16);
+  let hexG = parseInt(hex.substr(3, 2), 16);
+  let hexB = parseInt(hex.substr(4, 2), 16);
+
+  let rgba = `rgba(${hexR}, ${hexG}, ${hexB}, ${opacity})`;
+
+  return rgba;
+}
+
+export function convert12hTo24h(hour) {
+  if (hour.includes('am')) {
+    return hour.includes('12') ? '00' : hour.split(' ')[0].padStart(2, '0');
+  } else {
+    return hour.includes('12') ? '12' : (12 + parseInt(hour.split(' ')[0])).toString().padStart(2, '0');
+  }
+}
